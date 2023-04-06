@@ -108,7 +108,6 @@
 .commentForm:focus-within footer {
     visibility: visible;
     max-height: none;
-
 }
 
 .commentForm button[type=submit] {
@@ -121,8 +120,6 @@
     font-weight: bold;
     cursor: pointer;
     transition: 0.1s;
-    
-
 }
 
 .commentForm button[type=submit]:hover {
