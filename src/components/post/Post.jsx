@@ -9,7 +9,9 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 export function Post({ author, publishedAt, content }) {
 
-    const [comments, setComments] = useState([1, 2])
+    const [comments, setComments] = useState(['Post'])
+
+    const [newCommentText, setNewCommentText] = useState('')
 
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", { locale: ptBR });
 
@@ -20,8 +22,12 @@ export function Post({ author, publishedAt, content }) {
 
     function handleNewComment() {
         event.preventDefault();
-        setComments([...comments.length + 1])
+        setComments([...comments, newCommentText]);
+        setNewCommentText('');
+    }
 
+    function handleNewCommentChange() {
+        setNewCommentText(event.target.value)
     }
 
     return (
@@ -57,8 +63,12 @@ export function Post({ author, publishedAt, content }) {
                 <strong>Deixe seu feedback</strong>
 
                 <textarea
+                    name="comment"
+                    value={newCommentText}
                     placeholder='Deixe um comentario'
+                    onChange={handleNewCommentChange}
                 />
+
                 <footer>
                     <button type='submit'>Publicar</button>
                 </footer>
@@ -66,7 +76,7 @@ export function Post({ author, publishedAt, content }) {
 
             <div className={styles.commentList}>
                 {comments.map(comment => {
-                    return <Comment />
+                    return <Comment content={comment} />
                 })}
 
             </div>
