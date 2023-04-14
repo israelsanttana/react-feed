@@ -20,7 +20,7 @@ export function Post({ author, publishedAt, content }) {
 
     function handleNewComment() {
         event.preventDefault();
-        setComments([...comments, +1])
+        setComments([...comments.length + 1])
 
     }
 
