@@ -18,24 +18,28 @@ export function Post({ author, publishedAt, content }) {
     const plublishDateRelativeToNow = formatDistanceToNow(publishedAt, {
         locale: ptBR,
         addSuffix: true,
-    })
+    });
 
     function handleNewComment() {
         event.preventDefault();
         setComments([...comments, newCommentText]);
         setNewCommentText('');
-    }
+    };
 
     function handleNewCommentChange() {
         setNewCommentText(event.target.value)
-    }
+    };
+
+
 
     function deleteComment(commentToDelete) {
         const commentsWhitoutDeleteOne = comments.filter(comment => {
             return comment !== commentToDelete
         })
         setComments(commentsWhitoutDeleteOne);
-    }
+    };
+
+    const isNewCommentEmpty = newCommentText.length === 0;
 
     return (
         <article className={styles.post}>
@@ -74,10 +78,12 @@ export function Post({ author, publishedAt, content }) {
                     value={newCommentText}
                     placeholder='Deixe um comentario'
                     onChange={handleNewCommentChange}
+                    required
+
                 />
 
                 <footer>
-                    <button type='submit'>Publicar</button>
+                    <button type='submit' disabled={isNewCommentEmpty} >Publicar</button>
                 </footer>
             </form>
 
